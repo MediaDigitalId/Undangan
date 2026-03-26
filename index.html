@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romeo & Juliet</title>
+    
+    <meta name="title" content="Undangan Pernikahan">
+    <meta name="description" content="Acheng & Wati">
+    <meta itemprop="name" content="Undangan Pernikahan">
+    <meta itemprop="description" content="Acheng & Wati">
+    <meta itemprop="image" content="https://mediadigitalid.github.io/Undangan/thumb.jpg">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Undangan Pernikahan">
+    <meta property="og:description" content="Acheng & Wati">
+    <meta property="og:image" content="https://mediadigitalid.github.io/Undangan/thumb.jpg">
+    <meta property="og:image:secure_url" content="https://mediadigitalid.github.io/Undangan/thumb.jpg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#050505; --gold:#d4af37; --card:rgba(20,20,20,0.9); --text:#fff; --grad:linear-gradient(90deg, #d4af37, #fceabb, #d4af37); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        
+        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        #particle-container { position: fixed; inset: 0; z-index: 5; pointer-events: none; }
+        .particle { position: absolute; background-size: contain; background-repeat: no-repeat; opacity: 0.6; }
+
+        #cover { position: fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+        .cover-bg { position:absolute; inset:-5%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('') center/cover; }
+        
+        /* FIX DESAIN COVER: Tanpa Frame Hitam dan Bunga */
+        .cover-card { 
+            position:relative; z-index:10; 
+            background: transparent !important; 
+            backdrop-filter: none; 
+            padding:20px; 
+            border: none; 
+            text-align:center; width:100%; max-width:400px; 
+            margin-top: 15vh;
+            color: #fff !important;
+        }
+
+        .wedding-label {
+            letter-spacing:4px; font-size:0.75rem; text-transform:uppercase;
+            background: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(5px);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .guest-box {
+            background: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(5px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .grad-text, h2.font-judul, h3.font-judul { 
+            font-family: 'Playfair Display', serif !important; 
+        }
+
+        .grad-text {
+            background: var(--grad); background-size: 200% auto; -webkit-background-clip: text; color: transparent;
+            font-size: 3.5rem; line-height: 1.1; margin: 10px 0;
+            padding-bottom: 10px; 
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .section { min-height:100vh; padding:80px 20px; display:flex; flex-direction:column; align-items:center; position:relative; z-index:10; }
+        
+        /* KONTEN BAWAH TETAP SEPERTI ASLI */
+        .luxury-card { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.postimg.cc/XJnz1yry/Pngtree-flower-invitation-background-5304812.png') center/cover !important; 
+            border: 1px solid var(--gold); padding:40px 20px; border-radius:30px; width:100%; max-width:450px; text-align:center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            color: #fff !important;
+        }
+        
+        .parallax-wrap { width:160px; height:220px; border-radius:100px; border:2px solid var(--gold); overflow:hidden; margin:20px auto; }
+        .parallax-img { width:120%; height:120%; object-fit:cover; }
+
+        .btn-main { background: var(--gold); color:#000; padding:15px 40px; border-radius:50px; font-weight:bold; cursor:pointer; text-decoration:none; display:inline-block; border:none; margin-top:20px; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .cd-item { border:1px solid var(--gold); padding:10px; border-radius:12px; min-width:70px; background: rgba(0,0,0,0.4); }
+        .cd-num { font-size:1.8rem; font-weight:bold; color:var(--gold); }
+        .nav-float { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(100px); background:rgba(0,0,0,0.8); border:1px solid var(--gold); padding:15px 35px; border-radius:50px; display:flex; gap:30px; z-index:1000; backdrop-filter: blur(5px); }
+        .music-toggle { position:fixed; top:20px; right:20px; z-index:1000; width:45px; height:45px; background:rgba(0,0,0,0.5); border:1px solid var(--gold); border-radius:50%; display:flex; justify-content:center; align-items:center; color:var(--gold); cursor:pointer; backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body>
+
+    <div id="particle-container"></div>
+
+    <div id="cover">
+        <div class="cover-bg" id="parallaxCover"></div>
+        <div class="cover-card">
+            <div class="wedding-label">Wedding Celebration</div>
+            <h1 class="grad-text" id="weddingName">Romeo<br>&<br>Juliet</h1>
+            
+            <div class="guest-box">
+                <p style="margin:0; opacity:0.9; font-size: 0.9rem;">Kepada: <br><strong id="namaTamu" style="font-size: 1.2rem; color: var(--gold);">Tamu Kehormatan</strong></p>
+            </div>
+            <br>
+            <button class="btn-main" onclick="openInv()">Buka Undangan</button>
+        </div>
+    </div>
+
+    
+
+    <nav class="nav-float" id="navbar">
+        <span onclick="window.scrollTo({top:0, behavior:'smooth'})">🏠</span>
+        <span onclick="document.getElementById('couple').scrollIntoView({behavior:'smooth'})">❤️</span>
+        <span onclick="document.getElementById('event').scrollIntoView({behavior:'smooth'})">📅</span>
+        <span onclick="document.getElementById('gift').scrollIntoView({behavior:'smooth'})">🎁</span>
+    </nav>
+
+    <main id="main-content" style="opacity:0">
+        <section class="section">
+            <div class="luxury-card gsap-reveal">
+                <p style="font-style:italic; font-size:0.9rem;">"Love is a journey..."</p>
+            </div>
+        </section>
+
+        <section id="couple" class="section">
+            <div class="luxury-card gsap-reveal">
+                <h2 class="font-judul" style="color:var(--gold); font-size:2.2rem; margin-bottom:15px;">Mempelai</h2>
+                <div class="parallax-wrap"><img src="" class="parallax-img"></div>
+                <h3 class="font-judul" style="font-size:2.5rem; color:var(--gold);">Romeo</h3>
+                <p style="font-size:0.8rem;">Putra Bpk. X</p>
+                
+                <div style="font-size:1.5rem; margin:30px 0;">&</div>
+                
+                <div class="parallax-wrap"><img src="" class="parallax-img"></div>
+                <h3 class="font-judul" style="font-size:2.5rem; color:var(--gold);">Juliet</h3>
+                <p style="font-size:0.8rem;">Putri Bpk. Y</p>
+
+                
+            </div>
+        </section>
+
+        <section id="event" class="section">
+            <div class="luxury-card gsap-reveal">
+                <h2 class="font-judul" style="color:var(--gold); font-size:2.2rem; margin-bottom:15px;">The Ceremony</h2>
+                <div style="font-size:1.5rem; margin:20px 0; font-weight:600;">2026-01-01</div>
+                <div style="display:flex; gap:10px; justify-content:center; margin-bottom:30px;">
+                    <div class="cd-item"><div id="d" class="cd-num">0</div><small>Day</small></div>
+                    <div class="cd-item"><div id="h" class="cd-num">0</div><small>Hrs</small></div>
+                    <div class="cd-item"><div id="m" class="cd-num">0</div><small>Min</small></div>
+                </div>
+                <h3 style="color:var(--gold); font-size:1.4rem; font-weight:bold;">Grand Palace</h3>
+                <p style="font-size:0.9rem; opacity:0.8; margin-top:5px;">Jakarta City</p>
+                <a href="https://maps.google.com/?q=Grand%20Palace%20Jakarta%20City" target="_blank" class="btn-main" style="transform:scale(0.8)">📍 Google Maps</a>
+                
+            </div>
+        </section>
+
+        
+
+        
+
+        <section id="gift" class="section">
+            <div class="luxury-card gsap-reveal">
+                <h2 class="font-judul" style="color:var(--gold); font-size:2.2rem; margin-bottom:20px;">Wedding Gift</h2>
+                <div style="padding:25px; border:1px dashed var(--gold); border-radius:20px;">
+                    <p style="text-transform:uppercase; tracking-widest;">BCA</p>
+                    <p style="font-size:1.5rem; font-weight:bold; letter-spacing:2px; margin:10px 0;">12345678</p>
+                    <p>a.n Mempelai</p>
+                    <button class="btn-main" style="font-size:0.7rem; padding:8px 20px;" onclick="copyRekening()">Copy Account</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tamu = urlParams.get('to');
+            if(tamu) {
+                const elTamu = document.getElementById('namaTamu');
+                if(elTamu) elTamu.innerText = tamu;
+            }
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to("#weddingName", {
+            backgroundPosition: "200% center",
+            duration: 4,
+            repeat: -1,
+            ease: "none"
+        });
+
+        function initParticles() {
+            const container = document.getElementById('particle-container');
+            const count = 30;
+            const type = "dust";
+            
+            for(let i=0; i<count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                
+                if(type === 'petals') {
+                    p.innerHTML = '🌸'; p.style.fontSize = Math.random()*15+10+'px';
+                } else if(type === 'snow') {
+                    p.style.width = p.style.height = Math.random()*5+2+'px';
+                    p.style.background = '#fff'; p.style.borderRadius = '50%';
+                } else {
+                    p.style.width = p.style.height = Math.random()*3+1+'px';
+                    p.style.background = '#d4af37'; p.style.boxShadow = '0 0 5px #d4af37';
+                }
+
+                container.appendChild(p);
+                animateParticle(p);
+            }
+        }
+
+        function animateParticle(el) {
+            gsap.set(el, { x: Math.random()*window.innerWidth, y: -50, opacity: Math.random() });
+            gsap.to(el, {
+                y: window.innerHeight + 50,
+                x: "+=" + (Math.random()*200 - 100),
+                rotation: Math.random()*360,
+                duration: Math.random()*10 + 5,
+                ease: "none",
+                repeat: -1,
+                delay: Math.random()*10
+            });
+        }
+
+        function openInv(){
+            const tl = gsap.timeline();
+            tl.to(".cover-card", { scale: 0.8, opacity: 0, duration: 0.8, ease: "power2.in" })
+              .to("#cover", { y: "-100%", duration: 1.2, ease: "expo.inOut" })
+              .to("#main-content", { opacity: 1, duration: 0.5 }, "-=0.5")
+              .to("#navbar", { y: -20, duration: 1, ease: "back.out" });
+
+            if(document.getElementById('bgm')) document.getElementById('bgm').play();
+            initParticles();
+            initCountdown();
+            
+            gsap.utils.toArray(".gsap-reveal").forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: "top 90%" },
+                    y: 60, opacity: 0, duration: 1.5, ease: "power3.out"
+                });
+            });
+
+            gsap.utils.toArray(".parallax-img").forEach(img => {
+                gsap.to(img, {
+                    scrollTrigger: { trigger: img, scrub: 1 },
+                    y: -30, ease: "none"
+                });
+            });
+        }
+
+        function initCountdown(){
+            const target = new Date("2026-01-01T09:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                if(diff > 0){
+                    document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                }
+            }, 1000);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            gsap.to("#parallaxCover", { 
+                x: (window.innerWidth/2 - e.pageX)/40, 
+                y: (window.innerHeight/2 - e.pageY)/40, 
+                duration: 1.5 
+            });
+        });
+
+        function toggleMusic(){ const a = document.getElementById('bgm'); if(a.paused) a.play(); else a.pause(); }
+
+        function copyRekening(){
+            var temp = document.createElement("input");
+            temp.value = "12345678";
+            document.body.appendChild(temp);
+            temp.select();
+            temp.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+            alert("No. Rekening berhasil disalin!");
+        }
+    </script>
+</body>
+</html>
